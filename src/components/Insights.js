@@ -1,5 +1,6 @@
 import React from "react";
 import { useApp } from "../context/AppContext";
+import "./Insights.css";
 
 export default function Insights() {
   const { transactions } = useApp();
@@ -19,9 +20,9 @@ export default function Insights() {
   );
 
   return (
-    <div>
+    <div className="insights">
       <h2>Insights</h2>
-      <p>Highest Spending Category: {highest}</p>
+      <p>Highest Spending: {highest}</p>
       <p>Total Transactions: {transactions.length}</p>
     </div>
   );

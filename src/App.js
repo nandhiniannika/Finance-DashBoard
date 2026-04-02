@@ -21,13 +21,8 @@ function Dashboard() {
       </header>
 
       <SummaryCards />
-
-      <div className="chart-grid">
-        <Charts />
-      </div>
-
+      <Charts />
       <Insights />
-
       <TransactionsTable />
     </div>
   );

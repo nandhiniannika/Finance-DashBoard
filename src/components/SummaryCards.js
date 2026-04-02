@@ -1,14 +1,16 @@
 import React from "react";
 import { useApp } from "../context/AppContext";
-// import "./SummaryCards.css";
+import "./SummaryCards.css";
 
 export default function SummaryCards() {
   const { transactions } = useApp();
 
-  const income = transactions.filter(t => t.type === "income")
+  const income = transactions
+    .filter(t => t.type === "income")
     .reduce((a, b) => a + b.amount, 0);
 
-  const expenses = transactions.filter(t => t.type === "expense")
+  const expenses = transactions
+    .filter(t => t.type === "expense")
     .reduce((a, b) => a + b.amount, 0);
 
   const balance = income - expenses;

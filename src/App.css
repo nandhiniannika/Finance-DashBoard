@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   background: #f4f6f9;
 }
 
@@ -12,16 +12,22 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #333;
 }
 
 select {
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  cursor: pointer;
+  background: white;
 }
 
 .chart-grid {
-  display: flex;
-  gap: 20px;
   margin: 20px 0;
 }
