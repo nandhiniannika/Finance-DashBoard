@@ -1,6 +1,6 @@
 import React from "react";
 import { useApp } from "../context/AppContext";
-import "./TransactionsTable.css";
+// import "./TransactionsTable.css";
 
 export default function TransactionsTable() {
   const { transactions, search, setSearch, role, addTransaction } = useApp();

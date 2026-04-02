@@ -1,6 +1,6 @@
 import React from "react";
 import { useApp } from "../context/AppContext";
-import "./SummaryCards.css";
+// import "./SummaryCards.css";
 
 export default function SummaryCards() {
   const { transactions } = useApp();
