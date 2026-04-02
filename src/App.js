@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { AppProvider, useApp } from "./context/AppContext";
+import SummaryCards from "./components/SummaryCards";
+import TransactionsTable from "./components/TransactionsTable";
+import Insights from "./components/Insights";
+import Charts from "./components/Charts";
 
-function App() {
+function Dashboard() {
+  const { role, setRole } = useApp();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Finance Dashboard</h1>
+
+      <select value={role} onChange={(e) => setRole(e.target.value)}>
+        <option value="viewer">Viewer</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <SummaryCards />
+      <Charts />
+      <Insights />
+      <TransactionsTable />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <AppProvider>
+      <Dashboard />
+    </AppProvider>
+  );
+}
