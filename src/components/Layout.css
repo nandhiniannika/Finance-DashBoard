@@ -1,0 +1,230 @@
+:root {
+  --violet-main: #7c3aed;
+  --violet-light: #a78bfa;
+  --violet-soft: #ede9fe;
+  --bg-light: #f5f3ff;
+}
+
+/* 🌍 APP */
+.app {
+  font-family: "Inter", sans-serif;
+  background: var(--bg-light);
+  min-height: 100vh;
+}
+
+.dark {
+  background: #020617;
+  color: white;
+}
+
+/* 🎯 HERO */
+.hero {
+  background: linear-gradient(135deg, #a78bfa, #c4b5fd, #ddd6fe);
+  padding: 20px 40px 120px;
+  color: white;
+  border-radius: 0 0 40px 40px;
+}
+
+/* 🔝 NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 📍 CENTER NAV */
+.nav-center {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-center a {
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-center a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* 👉 RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 👤 USER ICON */
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+
+  transition: 0.3s;
+}
+
+.user-icon:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 📦 DROPDOWN MENU */
+.role-menu {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  width: 160px;
+
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(18px);
+
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+
+  animation: fadeIn 0.25s ease;
+  z-index: 10;
+}
+
+/* 🧾 ITEMS */
+.role-item {
+  padding: 14px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.role-item:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.role-item.active {
+  background: rgba(124,58,237,0.6);
+  font-weight: 600;
+}
+
+/* 🎬 ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌙 DARK MODE DROPDOWN */
+.dark .role-menu {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+/* 🌗 THEME BUTTON */
+.theme-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: white;
+
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
+
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(124, 58, 237, 0.7);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* 📄 CONTENT */
+.content {
+  margin-top: -90px;
+  padding: 20px;
+}
+
+/* 📱 RESPONSIVE */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 20px 25px 100px;
+  }
+
+  .nav-center {
+    gap: 15px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero {
+    padding: 15px 20px 90px;
+  }
+
+  .nav-center {
+    display: none;
+  }
+
+  .content {
+  margin-top: -60px; /* reduced from -90px */
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+  .user-icon,
+  .theme-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .hero {
+    padding: 15px 15px 80px;
+  }
+
+  .content {
+  margin-top: -60px; /* reduced from -90px */
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+}

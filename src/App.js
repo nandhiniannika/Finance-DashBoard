@@ -1,30 +1,20 @@
 import React from "react";
-import { AppProvider, useApp } from "./context/AppContext";
+import { AppProvider } from "./context/AppContext";
+import Layout from "./components/Layout";
 import SummaryCards from "./components/SummaryCards";
-import TransactionsTable from "./components/TransactionsTable";
-import Insights from "./components/Insights";
 import Charts from "./components/Charts";
+import Insights from "./components/Insights";
+import TransactionsTable from "./components/TransactionsTable";
 import "./App.css";
 
 function Dashboard() {
-  const { role, setRole } = useApp();
-
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Finance Dashboard</h1>
-
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="viewer">Viewer</option>
-          <option value="admin">Admin</option>
-        </select>
-      </header>
-
+    <Layout>
       <SummaryCards />
       <Charts />
       <Insights />
       <TransactionsTable />
-    </div>
+    </Layout>
   );
 }
 

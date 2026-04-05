@@ -1,34 +1,81 @@
+/* 💜 GRID */
 .cards {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
+/* 📊 CARD */
 .card {
-  flex: 1;
-  min-width: 200px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+
   padding: 20px;
-  border-radius: 14px;
-  color: white;
+  border-radius: 18px;
+
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ HOVER EFFECT */
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(124, 58, 237, 0.25);
+}
+
+/* 💜 TITLE */
+.card h3 {
+  color: #6d28d9;
+  margin-bottom: 8px;
+}
+
+/* 📈 VALUE TEXT */
+.card p {
   font-size: 18px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  color: #4c1d95;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+/* 🌙 DARK MODE */
+.dark .card {
+  background: rgba(15, 23, 42, 0.85);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-.card:nth-child(1) {
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
+.dark .card h3 {
+  color: #c4b5fd;
 }
 
-.card:nth-child(2) {
-  background: linear-gradient(135deg, #2196f3, #1565c0);
+.dark .card p {
+  color: #e0e7ff;
 }
 
-.card:nth-child(3) {
-  background: linear-gradient(135deg, #f44336, #c62828);
+/* ========================= */
+/* 📱 RESPONSIVE */
+/* ========================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
 }

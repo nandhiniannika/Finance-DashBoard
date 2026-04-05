@@ -1,90 +1,144 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useApp } from "../context/AppContext";
-import "./Charts.css";
 import {
+  ResponsiveContainer,
   LineChart,
   Line,
-  PieChart,
-  Pie,
-  Tooltip,
   XAxis,
   YAxis,
+  Tooltip,
   CartesianGrid,
+  PieChart,
+  Pie,
   Cell,
-  Legend,
-  ResponsiveContainer,
-  defs,
-  linearGradient,
-  stop
+  Legend
 } from "recharts";
+import "./Charts.css";
 
 export default function Charts() {
   const { transactions } = useApp();
+  const [loading, setLoading] = useState(true);
 
-  // 📈 Line Data
-  const trendData = transactions.map(t => ({
-    date: t.date,
-    amount: t.type === "income" ? t.amount : -t.amount
-  }));
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
-  // 🥧 Pie Data
-  const categoryMap = {};
-  transactions.forEach(t => {
-    if (t.type === "expense") {
-      categoryMap[t.category] =
-        (categoryMap[t.category] || 0) + t.amount;
+  // 📅 FORMAT DATE
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit"
+    });
+  };
+
+  // 🔥 GROUP DATA
+  const grouped = {};
+  transactions.forEach((t) => {
+    if (!grouped[t.date]) {
+      grouped[t.date] = { date: t.date, income: 0, expense: 0 };
     }
+    if (t.type === "income") grouped[t.date].income += t.amount;
+    else grouped[t.date].expense += t.amount;
   });
 
-  const pieData = Object.keys(categoryMap).map(key => ({
+  const data = Object.values(grouped);
+
+  // 🔥 PIE DATA
+  const categoryMap = {};
+  transactions
+    .filter((t) => t.type === "expense")
+    .forEach((t) => {
+      if (!categoryMap[t.category]) categoryMap[t.category] = 0;
+      categoryMap[t.category] += t.amount;
+    });
+
+  const pieData = Object.keys(categoryMap).map((key) => ({
     name: key,
     value: categoryMap[key]
   }));
 
-  // 🎨 Colors
-  const COLORS = ["#00C49F", "#0088FE", "#FFBB28", "#FF8042", "#A28CFF"];
+  // 💜 COLORS
+  const COLORS = ["#7c3aed", "#8b5cf6", "#a78bfa", "#c4b5fd"];
 
-  // 📊 Percentage Label
-  const renderLabel = ({ percent }) =>
-    `${(percent * 100).toFixed(0)}%`;
+  if (loading) {
+    return (
+      <div>
+        <div className="chart-box skeleton"></div>
+        <div className="chart-box skeleton"></div>
+      </div>
+    );
+  }
 
   return (
-    <div className="chart-container">
+    <div>
+      {/* 💜 LINE CHART */}
+      <div className="chart-box fade-in">
+        <h3>Income vs Expense</h3>
 
-      {/* 📈 Trend Chart */}
-      <div className="chart-box">
-        <h3>Balance Trend</h3>
-
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={trendData}>
-            
-            {/* 🌈 Gradient */}
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data}>
             <defs>
-              <linearGradient id="colorLine" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00C49F" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#0088FE" stopOpacity={0.2}/>
+              <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#7c3aed" stopOpacity={0.8} />
+                <stop offset="100%" stopColor="#7c3aed" stopOpacity={0.1} />
+              </linearGradient>
+
+              <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#c084fc" stopOpacity={0.8} />
+                <stop offset="100%" stopColor="#c084fc" stopOpacity={0.1} />
               </linearGradient>
             </defs>
 
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid stroke="#ede9fe" strokeDasharray="3 3" />
 
+            <XAxis
+              dataKey="date"
+              tickFormatter={formatDate}
+              tick={{ fill: "#6d28d9", fontSize: 12 }}
+            />
+
+            <YAxis tick={{ fill: "#6d28d9" }} />
+
+            <Tooltip
+              contentStyle={{
+                background: "#ffffff",
+                borderRadius: "10px",
+                border: "none"
+              }}
+              labelFormatter={formatDate}
+            />
+
+            <Legend />
+
+            {/* 💰 INCOME (NO DOTS) */}
             <Line
               type="monotone"
-              dataKey="amount"
-              stroke="url(#colorLine)"
+              dataKey="income"
+              stroke="#7c3aed"
               strokeWidth={3}
-              dot={{ r: 4 }}
+              dot={false}          // ❌ removed dots
+              activeDot={false}    // ❌ removed hover dot
+              isAnimationActive={true}
+            />
+
+            {/* 💸 EXPENSE (NO DOTS) */}
+            <Line
+              type="monotone"
+              dataKey="expense"
+              stroke="#c084fc"
+              strokeWidth={3}
+              dot={false}
+              activeDot={false}
               isAnimationActive={true}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* 🥧 Pie Chart */}
-      <div className="chart-box">
+      {/* 🍩 DONUT CHART */}
+      <div className="chart-box fade-in">
         <h3>Spending Breakdown</h3>
 
         <ResponsiveContainer width="100%" height={300}>
@@ -93,8 +147,11 @@ export default function Charts() {
               data={pieData}
               dataKey="value"
               nameKey="name"
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
               outerRadius={100}
-              label={renderLabel}
+              paddingAngle={3}
               isAnimationActive={true}
             >
               {pieData.map((entry, index) => (
@@ -110,7 +167,6 @@ export default function Charts() {
           </PieChart>
         </ResponsiveContainer>
       </div>
-
     </div>
   );
 }

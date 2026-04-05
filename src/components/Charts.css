@@ -1,33 +1,68 @@
 .chart-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.chart-box {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: white;
   padding: 20px;
   border-radius: 16px;
-  flex: 1;
-  min-width: 300px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  text-align: center;
-  transition: transform 0.2s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  margin-top: 20px;
 }
-
-.chart-box:hover {
-  transform: translateY(-5px);
+.recharts-line path {
+  filter: drop-shadow(0px 4px 6px rgba(124, 58, 237, 0.4));
 }
-
-.chart-box h3 {
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e289d9;
   margin-bottom: 15px;
-  color: #333;
+}
+/* ✨ FADE-IN ANIMATION */
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
 }
 
-/* 📱 Mobile */
-@media (max-width: 768px) {
-  .chart-container {
-    flex-direction: column;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ⏳ SKELETON LOADING */
+.skeleton {
+  height: 300px;
+  border-radius: 20px;
+  margin-top: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #ede9fe 25%,
+    #ddd6fe 50%,
+    #ede9fe 75%
+  );
+
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 🌙 DARK MODE SKELETON */
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #1e293b 25%,
+    #334155 50%,
+    #1e293b 75%
+  );
 }

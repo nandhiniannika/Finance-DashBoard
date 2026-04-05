@@ -27,7 +27,7 @@ export default function TransactionsTable() {
       />
 
       {role === "admin" && (
-        <button onClick={addTransaction}>➕ Add</button>
+        <button onClick={addTransaction}>Add</button>
       )}
 
       <table>
@@ -42,28 +42,22 @@ export default function TransactionsTable() {
         </thead>
 
         <tbody>
-          {filtered.length === 0 ? (
-            <tr>
-              <td colSpan="5">No Data</td>
-            </tr>
-          ) : (
-            filtered.map(t => (
-              <tr key={t.id}>
-                <td>{t.date}</td>
-                <td>{t.category}</td>
-                <td>₹{t.amount}</td>
-                <td>{t.type}</td>
+          {filtered.map(t => (
+            <tr key={t.id}>
+              <td>{t.date}</td>
+              <td>{t.category}</td>
+              <td>₹{t.amount}</td>
+              <td>{t.type}</td>
 
-                {role === "admin" && (
-                  <td>
-                    <button onClick={() => deleteTransaction(t.id)}>
-                      Delete
-                    </button>
-                  </td>
-                )}
-              </tr>
-            ))
-          )}
+              {role === "admin" && (
+                <td>
+                  <button onClick={() => deleteTransaction(t.id)}>
+                    Delete
+                  </button>
+                </td>
+              )}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
