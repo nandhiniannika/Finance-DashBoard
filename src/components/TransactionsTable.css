@@ -116,3 +116,15 @@ tr:not(:last-child) {
 .dark tr:hover {
   background: rgba(124, 58, 237, 0.2);
 }
+/* 📱 MOBILE VIEW */
+@media (max-width: 600px) {
+
+  table {
+    max-width: 100%;
+    font-size: 11px;      /* smaller text */
+    margin: 8px auto;
+  }
+
+  
+
+}
