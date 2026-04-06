@@ -4,6 +4,17 @@
   --violet-soft: #ede9fe;
   --bg-light: #f5f3ff;
 }
+.nav-center a {
+  text-decoration: none;   /* removes underline */
+  color: inherit;          /* keeps text color consistent */
+  padding: 6px 10px;       /* optional: spacing */
+  font-weight: 500;        /* optional: slightly bolder */
+  transition: color 0.2s;
+}
+
+.nav-center a:hover {
+  color: #7c3aed;          /* optional: highlight on hover */
+}
 
 /* 🌍 APP */
 .app {

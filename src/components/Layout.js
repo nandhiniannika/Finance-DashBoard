@@ -28,11 +28,11 @@ export default function Layout({ children }) {
           <h2>Finance</h2>
 
           <div className="nav-center">
-            <a className="active">Overview</a>
-            <a>Transactions</a>
-            <a>Accounts</a>
-            <a>Categories</a>
-          </div>
+  <a href="/" className="active">Overview</a>
+  <a href="/transactions">Transactions</a>
+  <a href="/accounts">Accounts</a>
+  <a href="/categories">Categories</a>
+</div>
 
           {/* 🔥 RIGHT SIDE */}
           <div className="nav-right">
