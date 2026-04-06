@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/nandhiniannika/Finance-DashBoard/static/css/main.fd730681.css",
+    "main.js": "/nandhiniannika/Finance-DashBoard/static/js/main.50dfc627.js",
+    "static/js/453.a8a588d2.chunk.js": "/nandhiniannika/Finance-DashBoard/static/js/453.a8a588d2.chunk.js",
+    "index.html": "/nandhiniannika/Finance-DashBoard/index.html",
+    "main.fd730681.css.map": "/nandhiniannika/Finance-DashBoard/static/css/main.fd730681.css.map",
+    "main.50dfc627.js.map": "/nandhiniannika/Finance-DashBoard/static/js/main.50dfc627.js.map",
+    "453.a8a588d2.chunk.js.map": "/nandhiniannika/Finance-DashBoard/static/js/453.a8a588d2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fd730681.css",
+    "static/js/main.50dfc627.js"
+  ]
+}
